@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management System</title>
+    <link rel="stylesheet" href="stylo.css">
+    <button type="logout" class="logout"><b>logut</b></button>
+
+    <style>
+          .container {
+            position: relative;
+            z-index: 1;
+            
+        }
+
+        .searchContainer {
+            margin-top: 20px; 
+        }
+
+        .table-container {
+            position: relative;
+            z-index: 2;
+            max-height: 400px; 
+            overflow-y: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border: 2px solid black; 
+            border-radius: 10px; 
+        }
+        
+        th, td {
+    border: 1px solid rgb(253, 253, 253);
+    padding: 20px 12px; 
+    text-align: center; 
+    line-height: 1.5; 
+}
+
+        thead th {
+    text-align: center; 
+    border-bottom: 4px solid black; 
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+}
+
+
+        td {
+            color: white;
+            border-bottom: 1px solid black; 
+            font-size: 18px; 
+        }
+        th {
+
+            color: black;
+        }
+        button {
+            margin-bottom: 20px; 
+            background: linear-gradient(to right, #0235B8, rgba(56, 8, 167, 0.651));
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            padding: 16px 40px; 
+            font-size: 24px; 
+            font-family: "Inter", Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .button-container {
+            text-align: right; 
+        }
+      
+        
+        .label-link {
+            margin-left: 1200px;
+            top: -200px;
+            cursor: pointer;
+            color: rgb(255, 255, 255);
+            text-decoration: underline;
+        }
+        .logout {
+    
+    position: fixed;
+    margin-left: 44cm;
+    margin-top: 34px;
+    width: 4%;
+    top: 20px;
+    right:- 20px;
+    z-index: 9999; /* Ensure it's displayed on top */
+    padding: 10px 10px;
+    background-color: #000000; /* Blue color */
+    color: #fff; /* White text color */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 70px;
+    
+}
+
+.logout:hover {
+    background-color: none; 
+    box-shadow: 0 0 40px #ff0303; 
+    color: whitesmoke;
+}
+
+    </style>
+</head>
+<body>
+    <a href="index.html?fromAdmin=true" class="label-link">Go to Home Page</a>
+
+    <div class="container">
+        <h1 style="color:rgb(246, 246, 246);">User Management System</h1>
+        
+        <div class="table-container">
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                    <tbody id="tableBody">
+                    >
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="userIdLabel" style="color: white;"></div>
+        
+        <div class="searchContainer">
+            <input type="text" id="searchInput" placeholder="Search users...">
+            <button onclick="searchUserByEmail()">Search</button>
+        </div>
+        <div>
+            <label style="color:rgb(246, 246, 246);" for="fullName">Full Name:</label>
+            <input type="text" id="fullName">
+        </div>
+        <div>
+            <label style="color:rgb(246, 246, 246);"  for="email">Email:</label>
+            <input type="email" id="email">
+        </div>
+        <div>
+            <label  style="color:rgb(246, 246, 246);" for="password">Password:</label>
+            <input type="password" id="password">
+        </div>
+        
+        <button onclick="createUser()">Create</button>
+        <button onclick="editUser()">Edit</button>
+        <button onclick="deleteUser()">Delete</button>
+    </div>
+    <script src="scripto.js"></script>
+</body>
+</html>

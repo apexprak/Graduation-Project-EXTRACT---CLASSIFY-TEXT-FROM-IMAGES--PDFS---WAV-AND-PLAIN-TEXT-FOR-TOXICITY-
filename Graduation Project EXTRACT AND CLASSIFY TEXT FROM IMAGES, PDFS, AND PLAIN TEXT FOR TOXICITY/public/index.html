@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <button type="logout" class="logout"><b>logout</b></button>
+    <title>Text Classification Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .progress-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    <button id="goToAdminButton" style="display: none;">Go to Admin Page</button>
+
+    <div id="content-wrapper">
+        <div id="container">
+            <h1>Text Extraction and Toxic Classification</h1>
+            <form id="inputForm">
+                <label style="    color: rgb(255 255 255 / 0%);" for="inputText"> :</label>
+               
+
+<textarea id="inputText" name="text" rows="4" cols="50" style="
+font-size: 20px;
+font-weight: bolder;
+"></textarea>
+                <label class="custom-file-upload file-upload">
+                    Upload File
+                    <input type="file" id="fileInput" name="file">
+                </label>
+                
+                <button type="submit" class="submit-button"><b>Submit</b></button>
+                <button type="button" onclick="clearText()" class="clr-button"><b><b>Clear</b></b></button>
+            </form>
+            <div id="classificationResult">
+                <h2>    </h2>
+                
+                <table id="classificationTable" border="1">
+                    <tr>
+                        <th>Category</th>
+                        <th>Probability</th>
+                        <th style="width:100%"></th>
+
+                    </tr>
+                </table>
+            </div>
+                    <button id="goToAdminButton" style="display: none;">Go to Admin Page</button>
+
+            <div class="progress-wrap progress identity-hate-progress" data-progress-percent="0">
+                <div class="progress-bar progress"></div>
+                <div class="progress-label">Identity Hate</div> <!-- Label for category name -->
+            </div>
+
+            <div class="progress-wrap progress insult-progress" data-progress-percent="0">
+                <div class="progress-bar progress"></div>
+                <div class="progress-label">Insult</div> <!-- Label for category name -->
+            </div>
+
+            <div class="progress-wrap progress obscene-progress" data-progress-percent="0">
+                <div class="progress-bar progress"></div>
+                <div class="progress-label">Obscene</div> <!-- Label for category name -->
+            </div>
+
+            <div class="progress-wrap progress severe-toxic-progress" data-progress-percent="0">
+                <div class="progress-bar progress"></div>
+                <div class="progress-label">Severe Toxic</div> <!-- Label for category name -->
+            </div>
+
+            <div class="progress-wrap progress threat-progress" data-progress-percent="0">
+                <div class="progress-bar progress"></div>
+                <div class="progress-label">Threat</div> <!-- Label for category name -->
+            </div>
+
+            <div class="progress-wrap progress toxic-progress" data-progress-percent="0">
+                <div class="progress-bar progress"></div>
+                <div class="progress-label">Toxic</div> <!-- Label for category name -->
+            </div> <!-- Label for category name -->
+            </div>
+            
+            <div id="history">
+                <h2 style="text-align: center;margin-top: -344px;margin-left:-4.1cm;color:rgba(240, 248, 255, 0)">History</h2>
+                <div id="historyItems">
+                    <!-- Your history items here -->
+                </div>
+                <div id="averageLabel">Average: <span id="averageScore">0</span></div>
+                <button onclick="clearHistory()" class="clear-history-button">Clear History</button>
+            </div>
+
+            
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>

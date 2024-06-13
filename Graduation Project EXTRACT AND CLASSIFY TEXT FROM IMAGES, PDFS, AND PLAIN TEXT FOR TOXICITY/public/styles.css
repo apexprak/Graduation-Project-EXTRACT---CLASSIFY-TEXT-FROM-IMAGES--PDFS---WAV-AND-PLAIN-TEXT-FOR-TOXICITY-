@@ -1,0 +1,505 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    background-color: #272739;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("F:\download\static\images\bg.jpg"); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #c45c90;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 40px; 
+    color: #0d5fd9a1; 
+    text-shadow: -1px -1px 0 #c26e6e, 1px -1px 0 #fff, -1px 1px 0 #fff,
+            1px 1px 0 #fff; 
+    font-weight: bold; 
+
+}
+
+#inputForm {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.clr-button {
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 40px;
+    background-color: #fff;
+    color: #000000;
+    border: 2px solid #000000;
+    width: 7830px;
+    height: 40px;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+.clr-button {
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 40px;
+    background-color: #fff;
+    color: #000000;
+    border: 2.5px solid #000000;
+    width: 24%;
+    height: 45px;
+    margin-top: -82.6px;
+    margin-right: -560px;
+}
+
+.clr-button:hover {
+    background-color: #000000; 
+    border: 1px solid #ff0303; 
+    box-shadow: 0 0 40px #ff0303; 
+    color: whitesmoke;
+}
+
+#fileContent,
+#classificationResult {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    overflow: hidden;
+
+    white-space: nowrap;
+    border: solid 1px #39888e;
+    min-width: 100px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+body {
+    background-color: #272739;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+}
+#content-wrapper {
+    padding: 5% 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#container {
+background-image: 'bg.jpg';
+    position: fixed;
+    width: 900px;
+    height: 1400px;
+    max-height: 20000px;
+    max-width: 8000px;
+    background-color: #19192d;
+    padding: 5%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.384);
+    margin-top: -100px;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+label,
+textarea,
+.custom-file-upload,
+button {
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 100%;
+}
+textarea {
+    width: 700px;
+    height: 200px;
+    margin-top: -70px;
+    padding: 2em;
+    border-radius: 15px;
+    border: 5px solid #7867c58e;
+    resize: horizontal;
+}
+
+.custom-file-upload {
+    margin-inline: 20px;
+    margin-top: -30px;
+    text-align: center;
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 40px;
+    background-color: #fff;
+    color: #000000;
+    border: 2px solid #000000;
+    width: 20%;
+    height: 20px;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload:hover {
+    background-color: #000000; 
+    border: 1px solid #00aeff; 
+    box-shadow: 0 0 40px #aeff; 
+    color: whitesmoke;
+}
+
+.submit-button {
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 40px;
+    background-color: #fff;
+    color: #000000;
+    border: 2px solid #000000;
+    width: 23%;
+    height: 40px;
+    margin-top: -82px;
+    margin-right: 560px;
+}
+
+.submit-button:hover {
+    background-color: #000000; 
+    border: 1px solid #00ffaa; 
+    box-shadow: 0 0 40px #20ff03; 
+    color: whitesmoke;
+}
+#averageLabel {
+    position: center;
+
+    top: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.clear-history-button:hover {
+    background-color: #000000; 
+    border: 1px solid #ff030300; 
+    box-shadow: 0 0 40px #ff0303; 
+    color: whitesmoke;
+}
+
+#fileContent,
+#classificationResult {
+    margin-top: 20px;
+    background-color: #f9f9f900;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#classificationTable {
+    position: fixed;
+    margin-bottom: -270.5px;
+
+    animation: glow 1s infinite alternate;
+    animation: glow 1s infinite alternate; 
+    box-shadow: 0 0 20px rgb(215, 42, 186), 0 0 40px blue; 
+    width: 900px;
+    height: 280px;
+    border-collapse: collapse;
+    margin-top: -38px;
+    border-radius: 10px; 
+    overflow: hidden; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+    background: linear-gradient(
+            to right,
+            #7986cd,
+            #2e8b57
+    ); 
+    margin-left: 0.011cm;
+
+    transition: height 0.5s; 
+}
+
+#c table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th,
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+@media (max-width: 768px) {
+    #content-wrapper {
+            padding: 10% 5%;
+    }
+}
+
+.clear-history-button {
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 40px;
+    background-color: #fff;
+    color: #000000;
+    border: 2px solid #000000;
+    width: 783px;
+    height: 40px;
+
+    margin-left: 2cm;
+}
+.clear-button {
+    color: white;
+
+    border: red;
+}
+.history-item {
+    position: relative;
+    padding: 2px;
+    margin-bottom: 0.6%;
+    background-color: #39888e;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 30px;
+}
+.history-item:hover {
+    background-color: #2896c2;
+    border: 1px solid rgb(59, 126, 226); 
+}
+.clear-button:hover {
+}
+.history-text {
+    width: 760px; 
+    height: 40px; 
+    display: inline-block;
+    padding: 5px;
+    color: #333;
+    font-weight: bold;
+    position: left;
+}
+.history-button {
+    padding: 10px 20px;
+    position: relative;
+    background: #f7ebeb; 
+    border: none; 
+    cursor: pointer; 
+
+    color: #333; 
+    border-radius: 4px; 
+    width: 760px; 
+    height: 30px; 
+
+    transition: background-color 0.2s ease-in-out; 
+    border-radius: 50px;
+}
+.history-button:hover {
+    background-color: #6effb7; 
+    border: 1px solid #00ff80; 
+    box-shadow: 0 0 10px #00ff80; 
+}
+
+#averageLabel {
+    position: absolute;
+    margin-bottom: 50px;
+    margin-left: 20cm;
+    top: 950px;
+    right: 1150px;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+@import "compass/css3";
+.progress {
+    position: relative;
+
+    color: #f50000;
+    width: 400px;
+    height: 29.5px;
+}
+
+.progress-wrap {
+    top: -25px;
+    margin-block: 20%;
+    width: 555px;
+    translate: 0.4cm;
+    background: linear-gradient(
+            to right,
+            rgb(0, 255, 255),
+            rgb(2, 18, 37),
+            rgb(0, 255, 255)
+    );
+    margin: 20px 9px;
+    overflow: hidden;
+    border: 2px solid #333; 
+    margin-left: 279px;
+    margin-bottom: -13.5px;
+    border-radius: 100px; 
+    .progress-bar {
+            width: 200px;
+            width: 100%;
+            background: #000000;
+            left: 0;
+            position: fixed;
+            top: 20;
+            background: #000000;
+    }
+}
+
+.progress-label {
+    color: #fff;
+}
+
+#historyItems {
+    max-width: 100%; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    padding: 0 10px; 
+    white-space: nowrap; 
+}
+.progress-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    text-align: center; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    max-width: 90%; 
+    padding-right: 20px; 
+}
+
+history-item {
+    position: fixed;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px; 
+    cursor: pointer;
+    padding: 0 10px; 
+}
+
+.history-button {
+    position: relative;
+    max-width: 100%; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+.history-item.expanded {
+    white-space: normal;
+    max-width: none;
+}
+
+#container .history-button:first-child {
+    display: none;
+}
+#history {
+    position: fixed;
+    margin-top: 24.7cm;
+    padding: 20px;
+}
+.h2 {
+}
+
+#goToAdminButton {
+    position: fixed;
+    width: 10%;
+    top: 20px;
+    right:- 20px;
+    z-index: 9999; /* Ensure it's displayed on top */
+    padding: 10px 10px;
+    background-color: #007bff; /* Blue color */
+    color: #fff; /* White text color */
+    border: none;
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#goToAdminButton:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+.logout {
+    
+    position: fixed;
+    margin-left: 27cm;
+    width: 3%;
+    top: 20px;
+    right:- 20px;
+    z-index: 9999; /* Ensure it's displayed on top */
+    padding: 10px 10px;
+    background-color: #000000; /* Blue color */
+    color: #fff; /* White text color */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 70px;
+    
+}
+
+.logout:hover {
+    background-color: none; 
+    box-shadow: 0 0 40px #ff0303; 
+    color: whitesmoke;
+}
