@@ -1,9 +1,6 @@
-from PyPDF2 import PdfFileReader
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, jsonify
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
-import subprocess
-import importlib.util
 import pickle
 import os
 import cv2
@@ -17,46 +14,21 @@ import pyodbc
 import re
 import string
 from flask import send_from_directory
+
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
-app = Flask(__name__, static_folder='public',static_url_path='/public')
+app = Flask(__name__, static_folder='public', static_url_path='/public')
 
 CORS(app)
 
 UPLOAD_FOLDER = r'C:\Users\katame\Downloads\uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-required_packages = {
-    "pandas": "pd",
-    "numpy": "np",
-    "scikit-learn": "sklearn",
-    "opencv-python-headless": "cv2",
-    "Pillow": "PIL",
-    "pytesseract": "pytesseract",
-    "PyPDF2": "PyPDF2",
-    "python-docx": "docx",
-    "SpeechRecognition": "speech_recognition",
-    "flask": "flask",
-    "flask_cors": "flask_cors",
-    "googletrans": "googletrans"
-}
-
-def is_package_installed(package_name):
-    spec = importlib.util.find_spec(package_name)
-    return spec is not None
-
-def install_missing_packages():
-    missing_packages = [package for package, import_name in required_packages.items() if
-                        not is_package_installed(import_name)]
-    if missing_packages:
-        print("The following packages are missing and will be installed:", ", ".join(missing_packages))
-        subprocess.check_call(["pip", "install"] + missing_packages)
-
-install_missing_packages()
 
 def tokenize(s):
     re_tok = re.compile(f'([{string.punctuation}“”¨«»®´·º½¾¿¡§£₤‘’])')
     return re_tok.sub(r' \1 ', s).split()
+
 
 def load_model():
     try:
@@ -67,7 +39,9 @@ def load_model():
         print(f"Error loading model: {e}")
         return None
 
+
 model_data = load_model()
+
 
 def predict_text_classification(txt, model_data):
     array, vec, label_cols = model_data
@@ -77,10 +51,12 @@ def predict_text_classification(txt, model_data):
         predsx[:, i] = m.predict_proba(vtxt)[:, 1]
     return predsx[0]
 
+
 def get_label_proba(predsx, label_cols, threshold=0.1):
     out = predsx.tolist()
     scores = [score if score > threshold else 0 for score in out]
     return {label: score for label, score in zip(label_cols, scores)}
+
 
 def classify_text(txt, model_data, translator):
     translated_text = translator.translate(txt, dest='en').text
@@ -96,12 +72,12 @@ def process_file(file_path, translator, model_data):
         img = cv2.imread(file_path)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
-        extracted_text = pytesseract.image_to_string(thresh)
+        extracted_text = pytesseract.image_to_string(thresh, lang='ara+eng')
 
     elif file_extension == '.pdf':
         text = ""
         with open(file_path, 'rb') as file:
-            reader = PdfFileReader(file)
+            reader = PyPDF2.PdfFileReader(file)
             for page_num in range(reader.getNumPages()):
                 text += reader.getPage(page_num).extractText()
         extracted_text = text
@@ -137,26 +113,14 @@ def process_file(file_path, translator, model_data):
     else:
         return {'error': 'Unsupported file format or no text extracted'}
 
+
 translator = Translator()
 
-server = 'tcp:4.tcp.eu.ngrok.io,19908'
-database = 'UserDatabase'
-driver = '{ODBC Driver 17 for SQL Server}'
-username = 'katame'
-password = '123'
 
-def create_connection():
-    connection_string = f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password};'
-    return pyodbc.connect(connection_string)
 
-try:
-    connection = create_connection()
-    print("Connection successful.")
-    connection.close()
-except pyodbc.Error as e:
-    print("Error connecting to the database:", e)
 def row_to_dict(row, column_names):
     return {column_name: row[i] for i, column_name in enumerate(column_names)}
+
 
 @app.route('/users', methods=['GET'])
 def get_users():
@@ -171,6 +135,7 @@ def get_users():
 
         app.logger.error('An error occurred while fetching users: %s', e)
         return jsonify({'error': 'An error occurred while fetching users.'}), 500
+
 
 @app.route('/users', methods=['POST'])
 def create_user():
@@ -192,6 +157,7 @@ def create_user():
         return jsonify({"message": "User created successfully"})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 @app.route('/get-emails', methods=['GET'])
 def get_emails():
@@ -217,7 +183,8 @@ def update_user(user_id):
         email = data.get('email')
         password = data.get('password')
 
-        cursor.execute("UPDATE Users SET full_name = ?, email = ?, password = ? WHERE ID = ?", (full_name, email, password, user_id))
+        cursor.execute("UPDATE Users SET full_name = ?, email = ?, password = ? WHERE ID = ?",
+                       (full_name, email, password, user_id))
 
         connection.commit()
 
@@ -227,8 +194,10 @@ def update_user(user_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
 @app.route('/user', methods=['GET'])
 def get_user():
+    global connection
     try:
 
         connection = create_connection()
@@ -264,6 +233,7 @@ def get_user():
 
         if connection:
             connection.close()
+
 
 @app.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
@@ -306,6 +276,7 @@ def process_file_endpoint():
             if os.path.exists(file_path):
                 os.remove(file_path)
 
+
 @app.route('/classify_text', methods=['POST'])
 def classify_text_endpoint():
     input_text = request.form.get('text')
@@ -320,15 +291,19 @@ def classify_text_endpoint():
             return jsonify({'error': 'An error occurred while processing the request'})
     else:
         return jsonify({'error': 'Missing required form parameter "text"'})
+
+
 import pyodbc
 
 server = 'katame'
 database = 'UserDatabase'
 driver = '{ODBC Driver 17 for SQL Server}'
 
+
 def create_connection():
     connection_string = f'DRIVER={driver};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
     return pyodbc.connect(connection_string)
+
 
 try:
     connection = create_connection()
@@ -336,6 +311,7 @@ try:
     connection.close()
 except pyodbc.Error as e:
     print("Error connecting to the database:", e)
+
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -371,7 +347,9 @@ def register():
         print(f"Error during registration: {e}")
         return jsonify({'error': 'Internal server error'}), 500
 
+
 from flask import request
+
 
 @app.route('/signin', methods=['POST'])
 def sign_in():
@@ -412,6 +390,7 @@ def sign_in():
         print(f"Error during sign-in: {e}")
         return jsonify({'error': 'Internal server error'}), 500
 
+
 @app.route('/forget-password', methods=['POST'])
 def forget_password():
     try:
@@ -444,6 +423,7 @@ def forget_password():
         print(f"Error during forget password: {e}")
         return jsonify({'error': 'Internal server error'}), 500
 
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_static(path):
@@ -453,6 +433,7 @@ def serve_static(path):
         return send_from_directory(app.static_folder, path)
     except FileNotFoundError:
         return 'File not found', 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)
